@@ -87,6 +87,7 @@ int linked_list_remove(linked_list_t *list) {
         list_node_t *temp = list->last;
         list->last = temp->previous;
         list->last->next = NULL;
+        free(temp->data);
         free(temp);
         list->current = list->last;
         list->size--;
@@ -95,6 +96,7 @@ int linked_list_remove(linked_list_t *list) {
         list_node_t *temp = list->first;
         list->first = temp->next;
         list->first->previous = NULL;
+        free(temp->data);
         free(temp);
         list->current = list->first;
         list->size--;
@@ -108,6 +110,7 @@ int linked_list_remove(linked_list_t *list) {
     before_current->next = after_current;
     after_current->previous = before_current;
 
+    free(current->data);
     free(current);
     list->size--;
 
@@ -132,9 +135,11 @@ void linked_list_free(linked_list_t *list) {
 
     while ((cur = temp) != NULL) {
         temp = cur->next;
+        free(cur->data);
         free(cur);
     }
 
+    free(list->first->data);
     free(list->first);
     free(list);
 }
@@ -146,8 +151,11 @@ int linked_list_clear(linked_list_t *list) {
     list_node_t *temp = cur->next;
     while ((cur = temp) != NULL) {
         temp = cur->next;
+        free(cur->data);
         free(cur);
     }
+    free(list->first->data);
+    free(list->first);
     list->size = 0;
     return true;
 }
@@ -167,7 +175,7 @@ inline int linked_list_next(linked_list_t *list) {
     return true;
 }
 
-inline int linked_list_before(linked_list_t *list) {
+inline int linked_list_previous(linked_list_t *list) {
     if (list == NULL) return false;
     if (linked_list_is_empty(list)) return false;
     list_node_t *temp = list->current;
