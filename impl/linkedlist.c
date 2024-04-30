@@ -176,10 +176,9 @@ inline int linked_list_next(linked_list_t *list) {
 }
 
 inline int linked_list_previous(linked_list_t *list) {
-    if (list == NULL) return false;
-    if (linked_list_is_empty(list)) return false;
-    list_node_t *temp = list->current;
-    if (temp != list->first) list->current = temp->previous;
+    if (linked_list_is_empty_or_null(list)) return false;
+    if (list->current == NULL) return false;
+    list->current = list->current->previous;
     return true;
 }
 
