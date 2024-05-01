@@ -7,11 +7,7 @@
 
 #include "linkedlist.h"
 #include <stdlib.h>
-
-typedef struct array_list {
-    void **data;
-    size_t size;
-} array_list_t;
+#include "arraylist.h"
 
 typedef struct binary_tree_node {
     void *data;
@@ -27,11 +23,6 @@ typedef struct set {
     void *data;
     size_t size;
 } set_t;
-
-int array_list_add(array_list_t *list, size_t idx, void *data);
-int array_list_remove(array_list_t *list, size_t idx);
-array_list_t *array_list_new(void);
-void array_list_free(array_list_t *list);
 
 int binary_tree_add(tree_node_t *node, void *data);
 int binary_tree_add_node(tree_node_t *node, tree_node_t *data);
