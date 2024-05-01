@@ -7,4 +7,6 @@ add_executable(cutil main.c
         include/datastructures.h
         impl/linkedlist.c
         include/linkedlist.h
-        include/debug.h)
+        include/debug.h
+        include/arraylist.h
+        impl/arraylist.c)
